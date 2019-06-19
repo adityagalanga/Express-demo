@@ -5,19 +5,18 @@ const app = express();
 app.use(express.json());
 
 const courses= [
-        {id:1,name:'course1'},
-        {id:2,name:'course2'},
-        {id:3,name:'course3'}
+        {id:1,name:'Aditya Galang'},
+        {id:2,name:'Nahdia Fauziah'},
+        {id:3,name:'Deri Fachrizsal'}
 
 ];
-app.get('/', (req,res) =>{
-    res.send('Hello World');
-});
-
 app.get('/api/courses',(req,res)=>{
     res.send(courses);
 });
 
+app.get('/', (req,res) =>{
+    res.send('Hello World');
+});
 app.post('/api/courses',(req,res) => {
     const { error } = validateCourse(req.body);
     if(error){
@@ -28,7 +27,6 @@ app.post('/api/courses',(req,res) => {
         id: courses.length + 1,
         name: req.body.name
     };
-    
     courses.push(course2);
     // console.log(courses);
     res.send(courses);
@@ -41,6 +39,8 @@ app.get('/api/courses/:id',(req,res)=>{
     if(!course) return res.status(404).send('The course with the given id not found')
     res.send(course);
 });
+
+
 const port = process.env.PORT || 3000;
 app.listen(port,()=> console.log('Listening on port ${port}...'));
 
